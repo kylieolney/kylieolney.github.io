@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kylie Olney - Portfolio</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/scripts.js"></script>
 </head>
-  <body>
-    <h1>KYLIE OLNEY - Portfolio</h1>
-    <img src="photoOfKylie.JPG" alt="Picture of Webpage Author" width="375px" height="250px"
-    style="float: left; margin-right:10px; margin-bottom:5px;"/>
+  <body id="mainPage">
+    <h1 id="header">KYLIE OLNEY - Portfolio</h1>
+
+    <div id="introSection">
+    <img id="intropic" src="images/photoOfKylie.JPG" alt="Picture of Webpage Author"/>
     <p style="line-height: 1.5;">Meet Kylie, a junior majoring in Compputer Science and minoring in "how many bugs will
        this <em>one</em> change make?" That's me. When I'm not battling with semicolons and questioning how 
        I've made it to college, I enjoy singing in a local choir. I also enojy playing piano for a children's
@@ -18,9 +21,18 @@
        my JavaScript projects. Hope you enjoy. </p>
        <p>Thanks for coming to my TED talk.</p>
        <p>Hakuna Matata, have a good day,</p>
-       <p>Kylie Olney(I'm going to bed now)</p>
+       <p>Kylie Olney<br>(I'm going to bed now)</p>
     <br>
+    </div>
+    <div id="jsSection">
     <h2>JavaScript Demos</h2>
     <p>This is still in develpment. Stay tuned for updates!</p>
+    </div>
+    <div id="bottomSection">
+    <p>Current page settings: <span id="setting">Default</span></p>
+    <p>Settings: <button onclick="defaultSetting()">default</button>
+                 <button onclick="lightSetting()">light</button>
+                 <button onclick="darkSetting()">dark</button></p>
+    </div>
   </body>
 </html>

@@ -1,0 +1,47 @@
+
+body {
+    background-color: #DAD7CD;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #a3b18a;
+    color: #344E41;
+    text-align: center;
+}
+
+#introSection {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+#jsSection {
+    padding-left: 20px;
+}
+
+#bottomSection {
+    padding-left: 60px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    height: 200px;
+    background-color: #a3b18a;
+    
+}
+
+button {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+#intropic {
+    width: 30vw;
+    height: auto;
+    float: left; 
+    margin-right:10px; 
+    margin-bottom:5px;
+}
