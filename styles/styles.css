@@ -15,22 +15,36 @@ h1 {
 
 #introSection {
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     padding-right: 40px;
     padding-left: 40px;
 }
 
 #jsSection {
     padding-left: 20px;
+    padding-bottom: 20px;
+
 }
 
 #bottomSection {
-    padding-left: 60px;
+    padding-right: 40px;
+    padding-left: 40px;
     padding-top: 10px;
-    padding-bottom: 40px;
-    height: 200px;
+    padding-bottom: 20px;
+    height: 100px;
     background-color: #a3b18a;
     
+}
+
+.goHome {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    padding-top: 40px;
+    text-align: center;
+    background-color: #a3b18a;
 }
 
 button {
@@ -38,7 +52,7 @@ button {
     margin-left: 5px;
 }
 
-#intropic {
+#intropic, img {
     width: 30vw;
     height: auto;
     float: left; 

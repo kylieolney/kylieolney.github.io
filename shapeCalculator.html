@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Calculator</title>
+    <link rel="stylesheet" href="styles/styles.css">
+
+</head>
+<body>
+    <h1>Parallelogram - Area, Perimeter, and Volume Calculator</h1>
+    <image src="images/Parallelepiped.png" alt="Parallelepiped - 3D Parallelogram"/>
+    <br>
+		<button onclick='area()'>Area</button>
+		<button onclick='perimeter()'>Perimeter</button>
+		<button onclick='volume()'>Volume</button>
+        <p><label for='base'>Base:&nbsp;&nbsp;&nbsp;&nbsp;</label><input type='text' id='base'></p>
+		<p><label for='height'>Height:&nbsp;</label><input type='text' id='height'></p>	
+        <p><label for='depth'>Depth:&nbsp;&nbsp;</label><input type='text' id='depth'></p>	
+		<p><b>Result: </b><span id='calculatorResult'></span></p>
+	<br><br><hr>
+    <br><br><br>
+    <a class="goHome"href="index.html">Return to Homepage</a>
+
+
+<script>
+    function area()
+    {
+        let base = document.getElementById('base').value;
+		let height = document.getElementById('height').value;
+        const result = parseFloat(base) * parseFloat(height);
+        document.getElementById('calculatorResult').innerHTML = result;
+
+    }
+
+    function perimeter()
+    {
+        let base = document.getElementById('base').value;
+		let height = document.getElementById('height').value;
+        const result = 2 * (parseFloat(base) + parseFloat(height));
+        document.getElementById('calculatorResult').innerHTML = result;
+    }
+
+    function volume()
+    {
+        let base = document.getElementById('base').value;
+		let height = document.getElementById('height').value;
+        let depth = document.getElementById('depth').value;
+        const result = parseFloat(base) * parseFloat(height) * parseFloat(depth);
+        document.getElementById('calculatorResult').innerHTML = result;
+    }
+</script>
+</body>
+</html>
+
