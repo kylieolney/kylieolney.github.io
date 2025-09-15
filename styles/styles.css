@@ -52,7 +52,15 @@ button {
     margin-left: 5px;
 }
 
-#intropic, img {
+#intropic {
+    width: 30vw;
+    height: auto;
+    float: left; 
+    margin-right:10px; 
+    margin-bottom:5px;
+}
+
+#shapeimg {
     width: 30vw;
     height: auto;
     float: left; 
