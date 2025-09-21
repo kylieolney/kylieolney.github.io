@@ -1,0 +1,46 @@
+body {
+    background-color: #3a5a40;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #a3b18a;
+    color: #344E41;
+    text-align: center;
+}
+
+p {
+    font-size: xx-large;
+    text-align: center;
+    color: white;
+}
+
+button {
+    width: 70px;
+    height: 70px;
+    font-size: xx-large;
+}
+
+table {
+    margin: auto;
+}
+
+.goHome {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    padding-top: 40px;
+    text-align: center;
+    background-color: #a3b18a;
+}
+
+#clearButton {
+    width: 70px;
+    height: 40px;
+    font-size: large;
+}
