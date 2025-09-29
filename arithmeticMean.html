@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Mean</title>
+    <script>
+//Write script Here 
+        let data = [];
+        function addValue() {
+            let input = parseFloat(document.getElementById("input").value);
+            if (isNaN(input)) {
+                alert("Input is not a value.");
+                return;
+            }
+            data.push(input);
+            updateData();
+        }
+        function removeValue() {
+            let input = parseFloat(document.getElementById("input").value);
+            let instance = 0;
+            for(let i = data.length - 1; i >= 0; i--) {
+                if(data[i] == input){
+                    data.splice(i, 1);      //remove one value at the index
+                    instance++;
+                }
+                console.log(data);
+            }
+            if(instance == 0){
+                alert("no such value exists in dataset");
+                return;
+            }
+            updateData();
+        }
+
+        function meanValue() {
+            let output = " ";
+            let sum = 0;
+            for(let i = 0; i < data.length; i++) {
+                sum += data[i];
+            }
+            let mean = sum/data.length;
+            output += mean;
+            console.log(output);
+            document.getElementById("mean").innerHTML = output;
+        }
+
+        function updateData() {
+            let output = "<p>"
+			    for (let i = 0; i < data.length; i++) {
+					output += data[i] + ", ";
+				}	
+			output += "</p>";
+			document.getElementById("dataSet").innerHTML = output;
+            meanValue();
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>Arithmetic Mean</h1>
+    <br><br><br>
+    <input id="input" type="text">
+    <button id ="addValue" onclick="addValue()">Add Value</button>
+    <button id="removeValue" onclick="removeValue()">Remove Value</button>
+    <br><br>
+    <h2>Current Datase</h2>
+    <span id="dataSet"></span>
+    <h2>Mean</h2>
+    <p>Mean is: </p><span id="mean"></span>
+    <br><br><br>
+    <a href="index.html">Return to Homepage</a>
+
+</body>
+</html>
