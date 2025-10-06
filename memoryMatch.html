@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Match</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        .tile {
+            font-size: xx-large;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #485963;
+            text-align: center;
+        }
+        table, p {
+            text-align: center;
+            padding-bottom: 40px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        td {
+            width: 55px;
+            height: 55px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to Memory Match</h1>
+    <p><button onclick="gameReset()">Reset Game</button></p>
+    <div id="gameBoard"></div>
+    <br><br><br>
+    <a class="goHome" href="index.html">Return to Homepage</a>
+    
+
+    <script>
+        //fix the bottom section Style 
+        //mess around with presentation
+        //maybe add point system(last)
+        let map = [];
+        let tile1 = null, tile2 = null;
+
+    const loadmap = (rows=4, cols=4) => {
+        let maxVal = (rows * cols)/2;
+        let numbers = [];
+        for (let i=1; i <= maxVal; i++) {
+            numbers.push(i);
+            numbers.push(i);
+        }
+        console.log(numbers);
+        const shuffle = array => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                let temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+        shuffledNums = shuffle(numbers);
+        console.log(shuffledNums);
+        let arrayIndex = 0
+        for(let row = 0; row < 4; row++) {
+            map[row] = [];
+            for(let col = 0; col < 4; col++){
+                map[row][col] = shuffledNums[arrayIndex];
+                arrayIndex++;
+            }
+        }
+        console.log(map);
+    } 
+
+    const makeBoard = (rows=4, cols=4) => {
+        let output = '<table>';
+        for (let row = 0; row < rows;  row++) {
+            output += '<tr>';
+            for (let col = 0; col < cols; col++) {
+                output += '<td><button' + ' class="tile"' + 
+                    ' id="' + row + '_' + col + '"' + 
+                    ' onclick="process(' + row + ',' + col + ')">' + 
+                    '</button></td>';
+            }
+            output += '</tr>';
+        }
+        document.getElementById('gameBoard').innerHTML = output + '</table>'
+    }
+    
+    const gameReset = () => {
+        loadmap();
+        makeBoard();
+    }
+
+    const process = (row, col) => {
+        let clickedTile = document.getElementById(row + '_' + col);
+
+        //clicked tile not already contain data
+        if (!Boolean(clickedTile.innerHTML)) {
+            //tile 1 not selected yet
+            if(!tile1) {
+                tile1 = clickedTile;
+                clickedTile.innerHTML = map[row][col];
+            }
+            //tile 2 not selected yet
+            else if (!tile2) {
+                tile2 = clickedTile;
+                clickedTile.innerHTML = map[row][col];
+            }
+        }
+        const checkMatch = () => {
+            if(tile1.innerHTML == tile2.innerHTML) {
+                tile1.hidden = true;
+                tile2.hidden = true;
+            }
+            tile1.innerHTML = '';
+            tile2.innerHTML = '';
+            tile1 = tile2 = null;
+        }
+        setTimeout(checkMatch, 2500);
+    }
+
+
+
+        
+    </script>
+</body>
+</html>
