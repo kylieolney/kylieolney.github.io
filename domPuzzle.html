@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Puzzle</title>
+    <style>
+    #puzzle {
+        width: 500px;
+        height: 500px;
+        border: 5px solid black;
+    }
+    </style>
+</head>
+<body>
+    <div id="puzzle"></div>
+
+
+    <script>
+    //Create heading
+        const title = document.createElement("h1");
+        title.textContent = "DOM Puzzle";
+        document.body.prepend(title);
+
+    //Set container for the puzzle
+        const puzzle = document.getElementById("puzzle");
+    //Set up grid for the puzzle
+        puzzle.style.display = "grid";
+        puzzle.style.gridTemplateColumns = "250px 250px";
+        puzzle.style.gridTemplateRows = "250px 250px";
+    //Set container for each quadrent
+        const Q1 = document.createElement("div");
+        const Q2 = document.createElement("div");
+        const Q3 = document.createElement("div");
+        const Q4 = document.createElement("div");
+
+        puzzle.appendChild(Q1);
+        puzzle.appendChild(Q2);
+        puzzle.appendChild(Q3);
+        puzzle.appendChild(Q4);
+
+
+    //Set up grid for Q1
+        Q1.style.display = "grid";
+        Q1.style.gridTemplateColumns = "125px 125px";
+        Q1.style.gridTemplateRows = "125px 125px";
+    //Create Buttons for Q1
+        const Q1buttons = [{label: "A", color: "#9455F4"}, {label: "B", color: "#4A2B74"},
+                           {label: "C", color: "#594492"}, {label: "D", color: "#854DDC"}];
+        Q1buttons.forEach(Q1button => {
+            const button = document.createElement("button");
+            button.textContent = Q1button.label;
+            button.style.backgroundColor = Q1button.color
+            button.style.width = "125px";
+            button.style.height = "125px";
+            button.style.color = "white";
+            Q1.appendChild(button);
+        });
+    //Q2 Setup
+        Q2.style.backgroundColor = "#7338A0";
+
+    //Q3 Setup
+        Q3.style.backgroundColor = "#7338A0";
+
+    //Q4 Setup
+        Q4.style.backgroundColor =  "#7338A0";
+        Q4.style.display = "grid";
+        Q4.style.gridTemplateColumns = "repeat(10, 25px)";
+        Q4.style.gridTemplateRows = "repeat(10, 25px)";
+
+    //Create Buttons
+    for (let i = 0; i < 100; i++) {
+        const Q4button = document.createElement("button");
+        Q4button.style.backgroundColor = "#C39CFE";
+        Q4button.style.width = "25px";
+        Q4button.style.height = "24px";
+        Q4button.setAttribute("class", "Q4button");
+        Q4.appendChild(Q4button);
+    }
+
+    //Add Description
+        const description = document.createElement("p");
+        description.textContent = "This is a puzzle created entriely with JavaScript.";
+        document.body.appendChild(description);
+
+    //Add Return to Homepage
+        const home = document.createElement("a")
+        home.href = "index.html";
+        home.textContent = "Return to Homepage";
+        document.body.appendChild(home);
+
+    //---------------------------------------------------------------------------------------//
+    //Add Event Listeners
+        //Border Interaction
+        puzzle.addEventListener("mouseenter", () => {puzzle.style.borderColor = "orange";});
+        puzzle.addEventListener("mouseleave", () => {puzzle.style.borderColor = "black";});
+    
+        //Button Interaction
+        const buttonsToChange = document.querySelectorAll(".Q4button")
+        buttonsToChange.forEach(button => {
+            button.addEventListener("click", function () {
+                this.style.backgroundColor = "#4A2574";
+            
+                const prev = this.previousElementSibling;
+                const next = this.nextElementSibling;
+                prev.style.backgroundColor = "#FF9E00";
+                next.style.backgroundColor = "#FF9E00";
+            });
+        })
+
+    </script>
+</body>
+</html>
