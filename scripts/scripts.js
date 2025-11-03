@@ -22,3 +22,8 @@ function darkSetting() {
     document.getElementById('bottomSection').style = "background-color: #444444;";
 
 }
+
+
+
+
+
