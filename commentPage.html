@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Comment</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body >
+     <div class="form">
+    <form id="commentSection">
+        <label for="name">Name:</label>
+        <input id="name" 
+               type="text" 
+               name="name"
+               pattern="[A-za-z]+"
+               title="Only letters and spaces allowed"
+               required
+               ><br>
+        <label for="phone">Phone Number: </label>
+        <input id="phone" 
+               type="tel"
+               name="phone"
+               placeholder="###-###-####"
+               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+               ><br>
+        <label for="email">Email:</label>
+        <input id="email" 
+               type="email" 
+               name="email"
+               autocomplete="email"
+               ><br>
+        <label for="comment">Enter Comment: </label>
+        <textarea rows="5" cols="29" name="comment" id="comment"></textarea>
+        <label for="username">Username:</label>
+        <input id="username" 
+               type="text" 
+               name="username"
+               ><br>
+        <span id="usernameFeedback" style="color: red;"></span>
+        <label for="password">Password:</label>
+        <input id="password" 
+               type="password" 
+               name="password"
+               minlength="8"
+               maxlength="16"
+               ><br>
+        <span id="passwordMessage" style="color: red;"></span>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+   </div>
+    <a class="goHome" href="index.html">Return to Homepage</a>
+</body>
+
+
+<script>//Form validation 
+document.getElementById("commentSection").addEventListener("submit", function(event) {
+    
+    let formData = [
+    document.getElementById("name").value,
+    document.getElementById("email").value,
+    document.getElementById("comment").value,
+    document.getElementById("username").value,
+    document.getElementById("password").value,
+    ];
+    const sanitizedData = formData.map(input => sanitize(input));
+    
+});
+//Sanitazation of Form
+function sanitize(data){
+    let dataWithoutTags = data.replace(/<[^>]*>/g, '');
+    let newData = dataWithoutTags.replace(/&/g, "&amp;")
+                                 .replace(/</g, "&lt;")
+                                 .replace(/>/g, "&gt;")
+                                 .replace(/"/g, "&quot;")
+                                 .replace(/'/g, "&apos;");
+    return newData;
+}
+
+document.getElementById("username").addEventListener("input", function(){
+    const username = this.value;
+    const usernameFeedback = document.getElementById("usernameFeedback");
+    const regex = /^\w*$/; // Matches zero or more letters, numbers, or underscores
+
+    if (regex.test(username)) {
+        usernameFeedback.textContent = ''; // Clear feedback if valid
+        this.style.borderColor = 'green'; 
+    } else {
+        usernameFeedback.textContent = 'Only letters, numbers, and underscores are allowed.';
+        this.style.borderColor = 'red'; 
+    }
+});
+
+document.getElementById("password").addEventListener("input", function(){
+    let passwordMessage = document.getElementById("passwordMessage");
+    let password = this.value;
+    const missing = [];
+    const passwordReq = [
+    {test: password.length > 8, message: "8-character minimum"},
+    {test: /[a-z]/.test(password), message: "lower-case letter"},
+    {test: /[A-Z]/.test(password), message: "upper-case letter"},
+    {test: /[0-9]/.test(password), message: "number"},
+    {test: /[!@#$%^&*]/.test(password), message: "special character"},
+    ]
+    passwordReq.forEach(req => {
+        if(!req.test)
+            missing.push(req.message);
+    });
+    
+    if(missing.length){
+        passwordMessage.textContent = "You are missing: " + missing.join(", ");
+        this.style.borderColor = "red";
+    }
+    else{
+        passwordMessage.textContent = "";  
+        this.style.borderColor = "green"; 
+    }
+});</script>
+</html>
