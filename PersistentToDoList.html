@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/scripts.js"></script>
+</head>
+<body id="mainPage">
+    <h1 id="header">TODO List</h1>
+    <div id="todoListPage">
+        <form id="todoList">
+            <input type="text" id="task" placeholder="Enter Task" required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul id="taskList"></ul>
+
+        <p id="sessionCount">Tasks Added: 0</p>
+    </div>
+    <div id="bottomSection">
+        <p>Current page settings: <span id="setting">Default</span></p>
+        <p>Settings: <button onclick="defaultSetting(); setPreference('default')">default</button>
+                    <button onclick="lightSetting(); setPreference('light')">light</button>
+                    <button onclick="darkSetting(); setPreference('dark')">dark</button></p>
+        <a href="index.html">Return to Homepage</a>
+    </div>
+    <script>
+        const input = document.getElementById('task');
+        const list = document.getElementById('taskList');
+
+        //JSON string to local storage
+        let task = localStorage.getItem('tasks')
+        //Since we can't have null in the for each-
+        //      if there is nothing in tasks, make it an empty array
+        let tasks = JSON.parse(task) ? JSON.parse(task) : [];
+
+
+
+        //render tasks
+        function renderTasks() {
+            list.innerHTML = '';
+            tasks.forEach((task, index) => { 
+                const li = document.createElement('li');
+                li.textContent = task;
+
+                //create remove button task
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = "Remove";
+                removeBtn.onclick = () => {
+                    tasks.splice(index, 1);
+                    updateTasks();
+                };
+
+                li.appendChild(removeBtn);
+                list.appendChild(li);
+            });
+        }
+
+        //Update storage
+        function updateTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+
+        //Submit Button
+        let form = document.getElementById('todoList');
+        form.addEventListener('submit', (element) => {
+            element.preventDefault();
+            const newTask = input.value;
+            if(newTask) {
+                tasks.push(newTask);
+                input.value = '';
+                updateTasks();
+            }
+            //Session storage
+            interactions++;
+            sessionStorage.setItem('sessionCount', interactions);
+            updateSessionCount();
+        });
+
+
+
+        //Session Storage
+            // initialize to zero or what every is in that session
+        let interactions = sessionStorage.getItem('sessionCount') ? parseInt(sessionStorage.getItem('sessionCount')) : 0;
+        function updateSessionCount() {
+            document.getElementById('sessionCount').textContent = "Taks added: " + interactions;
+        }
+
+        //Set Mode Preference
+        function setPreference(mode) {
+            let date = new Date();
+            date.setTime(date.getTime() + (24 * 60 * 60 * 1000)); //Working in milisecond (so lots of math)
+            let expires = "expires=" + date.toUTCString();
+            document.cookie = 'colorTheme=' + mode + ";" + expires  + "; path=/";
+            console.log(mode);
+        }
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if(cookie.startsWith(name + '=')){
+                    return cookie.substring(name.length + 1);
+                }
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () =>{
+            const theme = getCookie("colorTheme");
+            if (theme === 'light') {
+                lightSetting();
+            }
+            else if (theme === 'dark') {
+                darkSetting();
+            }
+            else {
+                defaultSetting();
+            }
+            
+        });
+
+        //Render page at the start
+        renderTasks();
+        updateSessionCount();
+
+
+
+        //Don't need to do the REST APIs
+    </script>
+</body>
+</html>

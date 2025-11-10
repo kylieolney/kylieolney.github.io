@@ -106,3 +106,12 @@ button {
   color: #a3b18a;
   border-width: 3px;
 }
+
+#todoListPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 65vh;
+    font-size: 20px;
+}
