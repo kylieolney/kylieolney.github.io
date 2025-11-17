@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Collection</title>
+    <style>
+        .bookImage {
+            height: auto;
+            width: 100%;
+        }
+        .book-entry {
+            border: 1px solid #ccc;
+            padding: 1em;
+            max-width: 200px;
+            font-family: sans-serif;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+        }
+
+    </style>
+</head>
+<body>
+        <h1>Book List(example)</h1>
+        <div id="bookList"></div>
+        <br><br><br><br>
+        <a class="goHome" href="index.html">Return to Homepage</a>
+    <script>
+        const JSONstring = `[
+            {"title": "Skyward", "author": "Brandon Sanderson", "rating": 8.5, "image": "images/skyward.jpg"},
+            {"title": "Cinder", "author": "Marissa Meyer", "rating": 9.0, "image": "images/cinder.jpg"},
+            {"title": "Traitor Prince", "author": "C.J. Redwine", "rating": 10.0, "image": "images/traitorPrince.jpg"}
+        ]`
+
+        class bookList {
+            title;
+            author;
+            #rating;
+            image;
+
+            constructor(title, author, rating, image) {
+                this.title = title;
+                this.author = author;
+                this.#rating = rating;
+                this.image = image;
+            }
+            toString() {
+                return `Title: ${this.title}, Author: ${this.author}, Rating: ${this.#rating}, Image: ${this.image}`;
+            }
+            
+            print(div) {
+                const img = document.createElement("img");
+                img.src = this.image;
+                img.alt = `${this.title} cover`;
+                img.className = "bookImage"
+            
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = this.title;
+
+                const authorElement = document.createElement('p');
+                authorElement.textContent = `Author: ${this.author}`;
+
+                const ratingElement = document.createElement('p');
+                ratingElement.textContent = `Rating: ${this.#rating}`;
+
+                div.appendChild(img);
+                div.appendChild(titleElement);
+                div.appendChild(authorElement);
+                div.appendChild(ratingElement);
+            }
+
+            get rating() {
+                return this.#rating;
+            }
+            set rating(value) {
+                this.#rating = value < 0 ? 0: value;
+            }
+        }
+        const bookData = JSON.parse(JSONstring);
+        const books = bookData.map(book => new bookList(book.title, book.author, book.rating, book.image));
+        const container = document.getElementById("bookList");
+
+        bookData.forEach(book => {
+        const bookInstance = new bookList(book.title, book.author, book.rating, book.image);
+        const bookDiv = document.createElement("div");
+        bookDiv.className = "book-entry";
+        bookInstance.print(bookDiv);
+        container.appendChild(bookDiv);
+        });
+    </script>
+</body>
+</html>
